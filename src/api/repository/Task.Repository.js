@@ -4,9 +4,7 @@ const TaskRel= require(Constants.MY_APP_MODEL_PATH + '/TaskRel');
 exports.addNewTask=(arParams)=>{
     return new Promise(function(resolve, reject) { 
         //arParams.dtCreated = UserModel.sequelize.fn('NOW'); 
-        console.log(arParams);
         let obj = { ...arParams };
-        console.log(obj);
         TaskRel.Task.create(obj)
         .then((result) => {    
             resolve(result.id); 
@@ -54,7 +52,8 @@ exports.deleteTask=(arParams)=>{
     return new Promise(function(resolve, reject) {
             
         let obj={ ...arParams};
-        let arConditions={id:obj.id};
+
+        let arConditions={id:obj.id,intUserId:obj.intUserId};
         TaskRel.Task.destroy({
             where : arConditions
             
